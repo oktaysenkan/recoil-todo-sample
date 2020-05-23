@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+import { useRecoilState } from 'recoil';
+
+import { todos } from './store/todo';
+
 import './App.css';
 
-function App() {
+const App = () => {
+  const [text, setText] = useRecoilState(todos);
+
+  const onChange = (event) => {
+    setText(event.target.value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input type="text" onChange={onChange} />
+      <div>{text}</div>
     </div>
   );
-}
+};
 
 export default App;
