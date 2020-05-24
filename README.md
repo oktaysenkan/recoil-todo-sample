@@ -1,6 +1,6 @@
 ## recoil-todo-sample
 
-Sample todo drag and drop app written with React and new state management library (Recoil.js)
+Sample todo drag and drop app, state managed with Recoil
 
 ## Links
 
