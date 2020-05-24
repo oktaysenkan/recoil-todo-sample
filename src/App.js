@@ -102,9 +102,9 @@ const App = () => {
       <div
         className="todo"
         onDrop={(e) => handleDrop(e, 'todo')}
-        onDragOver={(e) => handleDragOver(e)}
-        onDragEnter={(e) => handleDragEnter(e)}
-        onDragLeave={(e) => handleDragLeave(e)}
+        onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
       >
         <input type="text" onChange={handleTodoNameChange} />
         <button onClick={() => handleAddTodo(todoName, 'todo')}>Add</button>
@@ -114,9 +114,9 @@ const App = () => {
       <div
         className="in-progress"
         onDrop={(e) => handleDrop(e, 'inprogress')}
-        onDragOver={(e) => handleDragOver(e)}
-        onDragEnter={(e) => handleDragEnter(e)}
-        onDragLeave={(e) => handleDragLeave(e)}
+        onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
       >
         <input type="text" onChange={handleTodoNameChange} />
         <button onClick={() => handleAddTodo(todoName, 'inprogress')}>
@@ -128,9 +128,9 @@ const App = () => {
       <div
         className="done"
         onDrop={(e) => handleDrop(e, 'done')}
-        onDragOver={(e) => handleDragOver(e)}
-        onDragEnter={(e) => handleDragEnter(e)}
-        onDragLeave={(e) => handleDragLeave(e)}
+        onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
       >
         <input type="text" onChange={handleTodoNameChange} />
         <button onClick={() => handleAddTodo(todoName, 'done')}>Add</button>
