@@ -14,13 +14,28 @@ import './App.css';
 
 const App = () => {
   const [todoName, setTodoName] = useState('');
+  const [inProgressName, setInProgressName] = useState('');
+  const [doneName, setDoneName] = useState('');
 
   const [todos, setTodos] = useRecoilState(todosStore);
   const [inProgress, setInProgress] = useRecoilState(inProgressStore);
   const [done, setDone] = useRecoilState(doneStore);
 
-  const handleTodoNameChange = (event) => {
-    setTodoName(event.target.value);
+  const handleTodoNameChange = (type, event) => {
+    if (type === 'todo') {
+      setTodoName(event.target.value);
+      return;
+    }
+
+    if (type === 'inprogress') {
+      setInProgressName(event.target.value);
+      return;
+    }
+
+    if (type === 'done') {
+      setDoneName(event.target.value);
+      return;
+    }
   };
 
   const handleAddTodo = (name = todoName, type) => {
@@ -106,7 +121,7 @@ const App = () => {
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
       >
-        <input type="text" onChange={handleTodoNameChange} />
+        <input type="text" onChange={(e) => handleTodoNameChange('todo', e)} />
         <button onClick={() => handleAddTodo(todoName, 'todo')}>Add</button>
         <List data={todos} />
       </div>
@@ -118,8 +133,11 @@ const App = () => {
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
       >
-        <input type="text" onChange={handleTodoNameChange} />
-        <button onClick={() => handleAddTodo(todoName, 'inprogress')}>
+        <input
+          type="text"
+          onChange={(e) => handleTodoNameChange('inprogress', e)}
+        />
+        <button onClick={() => handleAddTodo(inProgressName, 'inprogress')}>
           Add
         </button>
         <List data={inProgress} />
@@ -132,8 +150,8 @@ const App = () => {
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
       >
-        <input type="text" onChange={handleTodoNameChange} />
-        <button onClick={() => handleAddTodo(todoName, 'done')}>Add</button>
+        <input type="text" onChange={(e) => handleTodoNameChange('done', e)} />
+        <button onClick={() => handleAddTodo(doneName, 'done')}>Add</button>
         <List data={done} />
       </div>
     </div>
