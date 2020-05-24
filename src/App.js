@@ -46,10 +46,21 @@ const App = () => {
     }
   };
 
-  const removeTodo = (id) => {
-    setTodos(todos.filter((item) => item.id !== id));
-    setInProgress(inProgress.filter((item) => item.id !== id));
-    setDone(done.filter((item) => item.id !== id));
+  const removeTodo = (type, id) => {
+    if (type === 'todo') {
+      setTodos(todos.filter((item) => item.id !== id));
+      return;
+    }
+
+    if (type === 'inprogress') {
+      setInProgress(inProgress.filter((item) => item.id !== id));
+      return;
+    }
+
+    if (type === 'done') {
+      setDone(done.filter((item) => item.id !== id));
+      return;
+    }
   };
 
   const handleDragEnter = (e) => {
@@ -74,7 +85,7 @@ const App = () => {
     const todoID = e.dataTransfer.getData('id');
     const todoStatus = e.dataTransfer.getData('status');
 
-    if (!todoName) {
+    if (!todoName || !todoStatus) {
       return;
     }
 
@@ -82,7 +93,7 @@ const App = () => {
       return;
     }
 
-    removeTodo(todoID);
+    removeTodo(todoStatus, todoID);
     handleAddTodo(todoName, type);
   };
 
