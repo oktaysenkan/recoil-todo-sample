@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
 import { RecoilRoot } from 'recoil';
+import RecoilLogger from 'recoil-logger';
 
 ReactDOM.render(
-  <RecoilRoot>
-    <React.StrictMode>
+  <React.StrictMode>
+    <RecoilRoot>
+      <RecoilLogger />
       <App />
-    </React.StrictMode>
-  </RecoilRoot>,
+    </RecoilRoot>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
