@@ -1,21 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { todos } from './store/todo';
+import {
+  todos as todosStore,
+  inProgress as inProgressStore,
+  done as doneStore,
+} from './store/todo';
+
+import List from './components/List';
 
 import './App.css';
 
 const App = () => {
-  const [text, setText] = useRecoilState(todos);
+  const [todoName, setTodoName] = useState('');
 
-  const onChange = (event) => {
-    setText(event.target.value);
+  const [todos, setTodos] = useRecoilState(todosStore);
+  const [inProgress, setInProgress] = useRecoilState(inProgressStore);
+  const [done, setDone] = useRecoilState(doneStore);
+
+  const handleTodoNameChange = (event) => {
+    setTodoName(event.target.value);
+  };
+
+  const handleAddTodo = () => {
+    setTodos(
+      todos.concat({
+        name: todoName,
+        status: 'todo',
+      })
+    );
+  };
+
+  const handleAddInProgress = () => {
+    setInProgress(
+      inProgress.concat({
+        name: todoName,
+        status: 'todo',
+      })
+    );
+  };
+
+  const handleAddDone = () => {
+    setDone(
+      done.concat({
+        name: todoName,
+        status: 'done',
+      })
+    );
   };
 
   return (
-    <div>
-      <input type="text" onChange={onChange} />
-      <div>{text}</div>
+    <div className="app">
+      <div>
+        <input type="text" onChange={handleTodoNameChange} />
+        <button onClick={handleAddTodo}>Add</button>
+        <List data={todos} />
+      </div>
+
+      <div>
+        <input type="text" onChange={handleTodoNameChange} />
+        <button onClick={handleAddInProgress}>Add</button>
+        <List data={inProgress} />
+      </div>
+
+      <div>
+        <input type="text" onChange={handleTodoNameChange} />
+        <button onClick={handleAddDone}>Add</button>
+        <List data={done} />
+      </div>
     </div>
   );
 };
