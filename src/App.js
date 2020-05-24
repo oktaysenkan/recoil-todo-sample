@@ -72,8 +72,13 @@ const App = () => {
     e.stopPropagation();
 
     const todoID = e.dataTransfer.getData('id');
+    const todoStatus = e.dataTransfer.getData('status');
 
     if (!todoName) {
+      return;
+    }
+
+    if (todoStatus === type) {
       return;
     }
 
