@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { uuid } from 'uuidv4';
 
 import {
   todos as todosStore,
@@ -23,41 +24,32 @@ const App = () => {
   };
 
   const handleAddTodo = (name = todoName, type) => {
+    const todo = {
+      name,
+      id: uuid(),
+      status: type,
+    };
+
     if (type === 'todo') {
-      setTodos(
-        todos.concat({
-          name,
-          status: type,
-        })
-      );
+      setTodos(todos.concat(todo));
       return;
     }
 
     if (type === 'inprogress') {
-      setInProgress(
-        inProgress.concat({
-          name,
-          status: type,
-        })
-      );
+      setInProgress(inProgress.concat(todo));
       return;
     }
 
     if (type === 'done') {
-      setDone(
-        done.concat({
-          name,
-          status: type,
-        })
-      );
+      setDone(done.concat(todo));
       return;
     }
   };
 
-  const removeTodo = (name) => {
-    setTodos(todos.filter((item) => item.name !== name));
-    setInProgress(inProgress.filter((item) => item.name !== name));
-    setDone(done.filter((item) => item.name !== name));
+  const removeTodo = (id) => {
+    setTodos(todos.filter((item) => item.id !== id));
+    setInProgress(inProgress.filter((item) => item.id !== id));
+    setDone(done.filter((item) => item.id !== id));
   };
 
   const handleDragEnter = (e) => {
@@ -79,13 +71,13 @@ const App = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    const todoName = e.dataTransfer.getData('name');
+    const todoID = e.dataTransfer.getData('id');
 
     if (!todoName) {
       return;
     }
 
-    removeTodo(todoName);
+    removeTodo(todoID);
     handleAddTodo(todoName, type);
   };
 
