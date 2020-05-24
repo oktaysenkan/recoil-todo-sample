@@ -99,8 +99,9 @@ const App = () => {
 
     const todoID = e.dataTransfer.getData('id');
     const todoStatus = e.dataTransfer.getData('status');
+    const todoName = e.dataTransfer.getData('name');
 
-    if (!todoName || !todoStatus) {
+    if (!todoID || !todoStatus || !todoName) {
       return;
     }
 

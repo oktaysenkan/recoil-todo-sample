@@ -3,6 +3,7 @@ import React from 'react';
 const List = ({ data }) => {
   const onDragStart = (event, todo) => {
     event.dataTransfer.setData('id', todo.id);
+    event.dataTransfer.setData('name', todo.name);
     event.dataTransfer.setData('status', todo.status);
   };
 
